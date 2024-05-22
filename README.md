@@ -5,7 +5,9 @@ ClipOCRViewer is a Python application that allows users to capture images from t
 ## Features
 
 - **Clipboard Image Capture**: Automatically captures images from the clipboard.
-- **Advanced Image Preprocessing**: Enhances image quality to improve OCR accuracy (grayscale conversion, resizing).
+- **Change window opacity**: you can change window opacity using `CTRL + Plus` and `CTRL + minus`.
+- **Change window size**: Using `CTRL + ArrowUp` and `CTRL + ArrowDown`.
+- **Image Preprocessing**: Enhances image quality to improve OCR accuracy (grayscale conversion, resizing).
 - **Tesseract OCR Integration**: Utilizes Tesseract OCR to extract text from preprocessed images.
 - **GUI Interface**: Simple and intuitive interface built with PyQt5.
 

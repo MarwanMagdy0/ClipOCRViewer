@@ -45,6 +45,7 @@ class ImageClipboardViewer(QMainWindow):
         self.setWindowFlags(Qt.CustomizeWindowHint | Qt.WindowStaysOnTopHint)
         self.setWindowTitle("Image Clipboard Viewer")
         loadUi(PATH + "load.ui", self)
+        self.scale_factor = 1
         self.update_image()
 
     def update_image(self):
@@ -54,9 +55,12 @@ class ImageClipboardViewer(QMainWindow):
         if mime_data.hasImage():
             image = mime_data.imageData()
             pixmap = QPixmap.fromImage(image)
+            pixmap = pixmap.scaled(int(pixmap.width() * self.scale_factor), int(pixmap.height() * self.scale_factor), Qt.KeepAspectRatio, Qt.SmoothTransformation)
             self.image_label.setPixmap(pixmap)
+            self.resize(pixmap.width(), pixmap.height())
         else:
             self.image_label.setText("There is no Image to preview")
+
 
     def keyPressEvent(self, event):
         if event.key() == Qt.Key_Escape:
@@ -70,6 +74,14 @@ class ImageClipboardViewer(QMainWindow):
         
         elif event.key() == Qt.Key_E and event.modifiers() == Qt.ControlModifier:
             self.get_text("eng")
+        
+        if event.key() == Qt.Key_Up and event.modifiers() == Qt.ControlModifier:
+            self.scale_factor +=0.1
+            self.update_image()
+        
+        if event.key() == Qt.Key_Down and event.modifiers() == Qt.ControlModifier:
+            self.scale_factor -=0.1
+            self.update_image()
         
         if event.modifiers() & Qt.ControlModifier:
             if event.key() == Qt.Key_Plus:
