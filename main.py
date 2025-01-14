@@ -1,12 +1,17 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QFileDialog, QDesktopWidget, QTextEdit, QSizePolicy
-from PyQt5.QtGui import QPixmap, QFont, QImage, QFontMetrics
-from PyQt5.QtCore import QObject, Qt, QPoint, QThread, pyqtSignal
-from PIL import Image, ImageQt, ImageFilter, ImageOps
+from PyQt5.QtGui import QPixmap, QImage, QFontMetrics
+from PyQt5.QtCore import  Qt, QPoint, QThread, pyqtSignal, QBuffer, QIODevice
+from PIL import Image, ImageQt
 from PyQt5.uic import loadUi
-import numpy as np
 import os
 PATH = os.path.dirname(os.path.realpath(__file__)) + "/"
+
+# the next lines is because PIL for some reasons removed the support of pyqt5
+ImageQt.QBuffer = QBuffer
+ImageQt.QIODevice = QIODevice
+ImageQt.QImage = QImage
+ImageQt.QPixmap = QPixmap
 
 class ImageOCR_Thread(QThread):
     send_image = pyqtSignal(QImage)
